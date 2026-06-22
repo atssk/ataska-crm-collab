@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { supabase } from '../lib/supabase'
-import { sha256hex } from '../lib/crypto'
 
 // ── Request access modal ──────────────────────────────────────────────────────
 
@@ -312,21 +311,15 @@ export default function LoginScreen({ onLogin }) {
   const [loading, setLoading]     = useState(false)
   const [showRequest, setShowRequest] = useState(false)
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
-    if (!email.trim() || !password) return
-    setLoading(true)
-    const hash = await sha256hex(password)
-    const { data: name } = await supabase.rpc('verify_hero_by_email', { p_email: email.trim(), p_hash: hash })
-    setLoading(false)
-    if (name) {
-      sessionStorage.setItem('ataska_user', name)
-      sessionStorage.setItem('ataska_auth', '1')
-      onLogin(name)
-    } else {
-      setError(true)
-      setPassword('')
-    }
+    // Backend removed (frontend-only mode) — log straight in, no verification.
+    // Use the typed email's name part if provided, otherwise default to Batman (admin).
+    const typed = email.trim().split('@')[0].trim()
+    const name = typed || 'Batman'
+    sessionStorage.setItem('ataska_user', name)
+    sessionStorage.setItem('ataska_auth', '1')
+    onLogin(name)
   }
 
   return (
