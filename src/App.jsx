@@ -6,10 +6,10 @@ import CharacterProfile, { ControlsPanel } from './components/CharacterProfile'
 import InvitePage from './components/InvitePage'
 
 const DASHBOARDS = [
-  { key: 'stayte',   label: 'Stayte',   active: true  },
-  { key: 'spiriq',   label: 'Spiriq',   active: false },
-  { key: 'stimul8',  label: 'Stimul8',  active: false },
-  { key: 'navian',   label: 'Navian',   active: false },
+  { key: 'stayte',   label: 'Project 1', active: true  },
+  { key: 'spiriq',   label: 'Project 2', active: false },
+  { key: 'stimul8',  label: 'Project 3', active: false },
+  { key: 'navian',   label: 'Project 4', active: false },
 ]
 
 function DashboardDropdown() {
